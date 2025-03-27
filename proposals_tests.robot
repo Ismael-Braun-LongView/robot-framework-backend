@@ -2,10 +2,19 @@
 Library    RequestsLibrary
 Library    Collections
 Resource   proposals_keywords.resource
+Library    PerformanceMetrics.py    WITH NAME    Perf
 
 *** Test Cases ***
 Fazer Login no Sistema
     Logar
+
+Testar a performace do endpoint de propostas
+    [Documentation]    Chamar o endpoint das propostas sem filtro e medir o tempo de resposta
+    ${response}    ${duration}=    Perf.Measure Execution   Procurar proposta
+    ${stats}=    Perf.Get Timing Stats    Procurar proposta
+    ${avg}=    Set Variable    ${stats['average']}
+    ${avg_formatted}=    Evaluate    "%.3f" % ${avg}
+    Log    Tempo médio: ${avg_formatted}s
 
 Procurar Proposta por CPF
     ${results}=    Procurar proposta    cpf=553.309.400-87

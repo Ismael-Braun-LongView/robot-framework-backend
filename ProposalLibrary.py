@@ -37,8 +37,8 @@ class ProposalLibrary:
             "Content-Type": "application/json"
         }
         
-        if not filters:
-            raise ValueError("Filtro vazio, informe ao menos um parâmetro.")
+        #if not filters:
+            #raise ValueError("Filtro vazio, informe ao menos um parâmetro.")
             
         response = requests.get(
             f"{self.base_url}{self.proposals_endpoint}",
